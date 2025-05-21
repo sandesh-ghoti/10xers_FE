@@ -13,7 +13,29 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+@layer components {
+  .max-container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .blur-sm {
+    filter: blur(5px);
+  }
+  .blur-md {
+    filter: blur(10px);
+  }
+  .blur-lg {
+    filter: blur(15px);
+  }
+  .blur-xl {
+    filter: blur(20px);
+  }
+}
 
+.active {
+  color: #436ceb;
+  font-weight: 700;
+}
 a {
   font-weight: 500;
   color: #646cff;
