@@ -37,7 +37,10 @@ interface UseFetchResult<T> extends IUseFetchState<T> {
   refetch: () => void;
 }
 
-export function useFetch<T = unknown>(url: string, options?: RequestInit): UseFetchResult<T> {
+export function useFetch<T = unknown>(
+  url: string,
+  options: RequestInit = { credentials: 'include' },
+): UseFetchResult<T> {
   const [state, dispatch] = useReducer(fetchReducer<T>, {
     data: null,
     error: null,
