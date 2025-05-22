@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
-import { BACKEND_URL } from '../config';
-import { login, useAppDispatch } from '../store';
-
-const LOGIN_URL = `${BACKEND_URL}/user/login`;
-const SIGNUP_URL = `${BACKEND_URL}/user/register`;
+import { loginApi, signupApi } from '../apis/auth';
+import {
+  errorMsg,
+  login,
+  removeErrorMsg,
+  setErrorMsg,
+  useAppDispatch,
+  useAppSelector,
+} from '../store';
 
 interface IProps {
   children?: React.ReactNode;
@@ -15,37 +19,33 @@ const Authentication: React.FC<IProps> = ({ isSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const error = useAppSelector(errorMsg);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handleLogin = async () => {
-    setError(null);
+    setSuccessMsg('');
+    dispatch(removeErrorMsg());
     setLoading(true);
     try {
       if (isSignup) {
-        const response = await fetch(SIGNUP_URL, {
-          method: 'POST',
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-        navigate('/login');
+        const res = await signupApi(email, password);
+        if (res) {
+          setSuccessMsg('success, please login now');
+          navigate('/login');
+        }
       } else {
-        const response = await fetch(LOGIN_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-        console.log(data);
-        dispatch(login(data.data));
-        navigate('/');
+        const res = await loginApi(email, password);
+        if (res) {
+          setSuccessMsg(res.message);
+          dispatch(login(res.user));
+          navigate('/');
+        }
       }
     } catch (error: any) {
-      setError(error.message);
+      console.error('got the issue at signup api', error);
+      dispatch(setErrorMsg(error.message));
     } finally {
       setLoading(false);
     }
@@ -70,6 +70,7 @@ const Authentication: React.FC<IProps> = ({ isSignup }) => {
           className='mb-4 w-full rounded border bg-gray-100 px-4 py-2 focus:outline-none dark:bg-gray-700'
         />
         {error && <p className='mb-4 text-sm text-red-500'>{error}</p>}
+        {successMsg && <p className='mb-4 text-lg text-green-500'>{successMsg}</p>}
         <button
           onClick={handleLogin}
           className={`w-full rounded bg-blue-500 px-4 py-2 font-bold text-white focus:outline-none ${
