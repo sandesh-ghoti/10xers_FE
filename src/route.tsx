@@ -3,6 +3,7 @@ import App from './App';
 import AuthUser from './components/AuthUser';
 import Authentication from './pages/Authentication';
 import Dashboard from './pages/Dashboard';
+import Detail from './pages/Detail';
 import Home from './pages/Home';
 
 export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Authentication isSignup={true} />,
+      },
+      {
+        path: '/details/:id',
+        element: <Detail />,
       },
       {
         path: '/dashboard',
