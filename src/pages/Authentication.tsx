@@ -33,13 +33,15 @@ const Authentication: React.FC<IProps> = ({ isSignup }) => {
         const res = await signupApi(email, password);
         if (res) {
           setSuccessMsg('success, please login now');
+          window.alert('success, please login now');
           navigate('/login');
         }
       } else {
         const res = await loginApi(email, password);
         if (res) {
-          setSuccessMsg(res.message);
-          dispatch(login(res.user));
+          setSuccessMsg('login success');
+          dispatch(login(res));
+          window.alert('login success');
           navigate('/');
         }
       }
