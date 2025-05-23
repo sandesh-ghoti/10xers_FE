@@ -60,6 +60,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
     <>
       <div
         id='crud-modal'
+        data-testid='crud-modal'
         tabIndex={-1}
         aria-hidden='true'
         className={`${showModal ? 'flex' : 'hidden'} fixed top-0 right-0 left-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-x-hidden overflow-y-auto bg-gray-950 opacity-95 md:inset-0`}
@@ -114,6 +115,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
                     type='text'
                     name='brand'
                     id='brand'
+                    data-testid='brand'
                     className='focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400'
                     placeholder='Type brand name'
                     value={productInput?.brand}
@@ -131,6 +133,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
                     type='text'
                     name='model'
                     id='model'
+                    data-testid='model'
                     className='focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400'
                     placeholder='Type Model name'
                     value={productInput?.modelName}
@@ -150,6 +153,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
                     type='number'
                     name='price'
                     id='price'
+                    data-testid='price'
                     className='focus:ring-primary-600 focus:border-primary-600 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400'
                     placeholder='Rs.2999'
                     value={productInput?.price}
@@ -167,6 +171,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
                   </label>
                   <textarea
                     id='description'
+                    data-testid='description'
                     rows={4}
                     className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
                     placeholder='Write product description here'
@@ -179,6 +184,7 @@ const Modal: React.FC<IProps> = ({ isUpdate, showModal, setShowModal, product })
               </div>
               <button
                 type='submit'
+                name='submit'
                 className='inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 <svg
