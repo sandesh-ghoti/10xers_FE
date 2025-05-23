@@ -15,7 +15,7 @@ const Dashboard = () => {
   const { isLoading, data, error } = useFetch<IProduct[]>(GET_ALL_PRODUCT_BY_ADMIN);
   if (!isUserLoggedIn) navigate('/login');
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div className='text-red-500'>{error}</div>;
   return (
     <div className='relative'>
       <ItemCardList title='Dashboard' list={data || []} />
